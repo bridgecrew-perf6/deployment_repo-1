@@ -39,27 +39,27 @@ with models.DAG(
 	    write_disposition='WRITE_APPEND',dag=dag)  # truncate and insert data)
 
 
-	# Move file to processed location
-	move_file = GCSToGCSOperator(
-	    task_id="move_file",
-	    source_bucket='sample_data_1234',
-	    source_object='input/weather_data_2021_*.csv',
-	    destination_bucket='sample_data_1234',
-	    destination_object='processed/weather_data_2021_',
-	    move_object=True,
-	    dag=dag
-	)
-
-	# #Modified move
+	# # Move file to processed location
 	# move_file = GCSToGCSOperator(
-	#     task_id="move_file_mod",
+	#     task_id="move_file",
 	#     source_bucket='sample_data_1234',
-	#     source_object=['input/weather_data_2021_*.csv'],
+	#     source_object='input/weather_data_2021_*.csv',
 	#     destination_bucket='sample_data_1234',
-	#     destination_object='verifychange/weather_data_2021_',
+	#     destination_object='processed/weather_data_2021_',
 	#     move_object=True,
 	#     dag=dag
 	# )
+
+	#Modified move
+	move_file = GCSToGCSOperator(
+	    task_id="move_file_mod",
+	    source_bucket='sample_data_1234',
+	    source_object='input/weather_data_2021_*.csv',
+	    destination_bucket='sample_data_1234',
+	    destination_object='verifychange/weather_data_2021_',
+	    move_object=True,
+	    dag=dag
+	)
 
 	# End Task
 	task_end = DummyOperator(task_id='end', trigger_rule="none_failed", do_xcom_push=False, dag=dag)
