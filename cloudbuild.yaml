@@ -1,8 +1,7 @@
 #deploy
 steps:
-- name: gcr.io/google.com/cloudsdktool/cloud-sdk
+- name: gcr.io/cloud-builders/gsutil
   id: Deploy
-  entrypoint: bash
-  args: ['gsutil -m rsync -r ./dags gs://${_COMPOSER_BUCKET}/dags']
+  args: ['-m', 'rsync', '-r', './dags', 'gs://${_COMPOSER_BUCKET}/dags']
 substitutions:
     _COMPOSER_BUCKET: us-central1-sample-composer-859df705-bucket
