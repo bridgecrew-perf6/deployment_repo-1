@@ -4,4 +4,4 @@ steps:
   id: Deploy
   args: ['-m', 'rsync', '-r', './dags', 'gs://${_COMPOSER_BUCKET}/dags']
 substitutions:
-    _COMPOSER_BUCKET: us-central1-sample-composer-859df705-bucket
+    _COMPOSER_BUCKET: us-central1-sample-composer-10f74102-bucket
